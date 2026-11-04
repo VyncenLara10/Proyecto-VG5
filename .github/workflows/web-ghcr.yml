@@ -19,6 +19,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Obtener SHA corto
+        id: vars
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
       - name: Nombre de imagen en minúsculas
         id: image
         run: |
@@ -39,5 +43,4 @@ jobs:
           file: apps/web/Dockerfile
           push: true
           tags: |
-            ${{ steps.image.outputs.name }}:dev
-            ${{ steps.image.outputs.name }}:sha-${{ github.sha }}
+            ${{ steps.image.outputs.name }}:sha-${{ steps.vars.outputs.short_sha }}

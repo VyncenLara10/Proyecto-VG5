@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: ghcr.io/vyncenlara10/proyecto-vg5/web:dev
+          image: ghcr.io/vyncenlara10/proyecto-vg5/web:sha-<SHA_CORTO>
           imagePullPolicy: Always
           ports:
             - name: http
