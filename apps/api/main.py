@@ -2,7 +2,8 @@ import os
 import psycopg
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from typing import Annotated
+from pydantic import BaseModel, Field, StringConstraints
 from prometheus_fastapi_instrumentator import Instrumentator
 
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://app:app@localhost:5432/app")
@@ -21,9 +22,11 @@ app.add_middleware(
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
 
+
+
 class ProductIn(BaseModel):
-    nombre: str
-    cantidad: int
+    nombre: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
+    cantidad: int = Field(ge=0, le=1_000_000)
 
 
 def db():
