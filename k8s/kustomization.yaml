@@ -5,3 +5,4 @@ resources:
   - argocd
   - platform/metallb
   - platform/traefik
+  - platform/doppler

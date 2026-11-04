@@ -1,0 +1,11 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: doppler-kubernetes-operator
+  namespace: kube-system
+spec:
+  repo: https://helm.doppler.com
+  chart: doppler-kubernetes-operator
+  version: "1.5.7"
+  targetNamespace: doppler-operator-system
+  createNamespace: true
