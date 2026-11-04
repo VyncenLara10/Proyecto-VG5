@@ -107,9 +107,10 @@ Requisitos: Docker en ejecución y la API accesible desde la máquina (`curl htt
 ## 6. Compatibilidad con Kubernetes
 
 - El contenedor expone el **puerto 80**; en el Deployment del clúster el `containerPort` debe ser `80` y el Service lo fronta con `targetPort: 80`.
-- `API_UPSTREAM` se inyecta como variable de entorno en el Deployment (allí apuntará al Service de la API en el clúster o a la IP externa, según el despliegue).
+- `API_UPSTREAM` se inyecta como variable de entorno en el Deployment (hoy apunta a la IP externa de la API: `http://192.168.50.114:8000`, centralizada en el ConfigMap `kubelab-web-config`).
 - Los probes del Deployment deben apuntar a `/` (Nginx), **no** a `/health`, para que el pod no se reinicie si la API o la BD caen.
-- Los manifiestos del web están en `k8s/apps/web/` (namespace `kubelab-dev`); el despliegue y la verificación en K3s se documentan en `docs/k8s/web.md`.
+- Los manifiestos del web están en `k8s/apps/web/` (namespace `apps`); el despliegue y la verificación en K3s se documentan en `docs/k8s/web.md`.
+- La imagen se publica automáticamente en GHCR con el workflow `.github/workflows/web-ghcr.yml` (contexto de build `apps/web`, etiqueta `ghcr.io/vyncenlara10/proyecto-vg5/web:dev`); ver `docs/k8s/web.md` §5.
 
 ## 7. Estado de verificación
 
@@ -119,18 +120,17 @@ Requisitos: Docker en ejecución y la API accesible desde la máquina (`curl htt
 | Contenedor en ejecución + `API_UPSTREAM` | ✅ Verificado |
 | `/health`, `/products`, `/metrics` por el proxy | ✅ `200` verificados |
 | CRUD por HTTP a través de Nginx | ✅ `201/200/204` verificados |
-| UI en navegador + capturas | ⚃ Pendiente |
+| UI en navegador + capturas | ✅ Verificado (capturas en §8) |
+| Publicación en GHCR + despliegue en K3s | ✅ Verificado (`docs/k8s/web.md` §8) |
 
-## 8. Capturas pendientes
+## 8. Capturas
 
-**[CAPTURA PENDIENTE: `docker-frontend-build.png`]**
+**[`docker-frontend-build.png`](evidencias/docker-frontend-build.png)**
 
-Descripción: Terminal mostrando el final del `docker build -t kubelab-web:dev .` sin errores (etapas de npm ci y vite build completadas).
+Terminal mostrando el final del `docker build -t kubelab-web:dev .` sin errores (etapas de `npm ci` y `vite build` completadas).
 Ubicación: `docs/evidencias/docker-frontend-build.png`
-Procedimiento: ejecutar el build del §2 desde una terminal limpia y capturar la salida final.
 
-**[CAPTURA PENDIENTE: `docker-frontend-running.png`]**
+**[`docker-frontend-running.png`](evidencias/docker-frontend-running.png)**
 
-Descripción: Terminal con `docker ps` mostrando el contenedor `kubelab-web` `Up` con puerto `0.0.0.0:8080->80/tcp`, junto a la salida de `curl http://localhost:8080/health` (`{"status":"ok"}`).
+Terminal con `docker ps` mostrando el contenedor `kubelab-web` `Up` con puerto `0.0.0.0:8080->80/tcp`, junto a la salida de `curl http://localhost:8080/health` (`{"status":"ok"}`).
 Ubicación: `docs/evidencias/docker-frontend-running.png`
-Procedimiento: ejecutar los comandos del §4 en una sola terminal y capturar.

@@ -1,0 +1,5 @@
+# Dominios del proyecto KubeLab — referencia hasta existir el archivo de zonas general
+# Agregar la línea correspondiente a /etc/hosts local para probar desde el navegador:
+
+192.168.50.240  app.grupo5.lab     # web (Ingress Traefik + MetalLB)
+# api.grupo5.lab  → pendiente: la API (Rocío) definirá cómo se expone

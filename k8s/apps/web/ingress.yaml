@@ -2,12 +2,22 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kubelab-web
-  namespace: kubelab-dev
+  namespace: apps
   labels:
     app: kubelab-web
 spec:
   ingressClassName: traefik
   rules:
+    - host: app.grupo5.lab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kubelab-web
+                port:
+                  number: 80
     - http:
         paths:
           - path: /
