@@ -8,4 +8,4 @@ resources:
   - hpa.yaml
 images:
   - name: ghcr.io/vyncenlara10/proyecto-vg5-api
-    newTag: "fa656c8"
+    newTag: "b4ceefc"
