@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubelab-web
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/VyncenLara10/Proyecto-VG5.git
+    targetRevision: feature/vyncen-integration
+    path: k8s/apps/web
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubelab-dev
