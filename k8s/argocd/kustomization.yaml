@@ -4,3 +4,4 @@ resources:
   - database-application.yaml
   - api-application.yaml
   - web-application.yaml
+  - observability-application.yaml
