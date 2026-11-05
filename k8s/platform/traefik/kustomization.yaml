@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - helmchartconfig.yaml
   - argocd-ingressroute.yaml
+  - api-ingressroute.yaml
