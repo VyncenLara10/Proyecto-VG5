@@ -5,3 +5,4 @@ resources:
   - helmchartconfig.yaml
   - argocd-ingressroute.yaml
   - api-ingressroute.yaml
+  - grafana-ingressroute.yaml
