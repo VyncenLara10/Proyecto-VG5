@@ -28,7 +28,7 @@ spec:
 
       persistentVolume:
         enabled: true
-        storageClass: nfs-client
+        storageClass: local-path
         size: 4Gi
 
       service:
