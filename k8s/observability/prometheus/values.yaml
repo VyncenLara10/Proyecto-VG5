@@ -21,3 +21,14 @@ server:
 
   service:
     type: ClusterIP
+
+extraScrapeConfigs: |
+  - job_name: kubelab-api
+    metrics_path: /metrics
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+          - api.kubelab-dev.svc.cluster.local:80
+        labels:
+          namespace: kubelab-dev
+          app: api
