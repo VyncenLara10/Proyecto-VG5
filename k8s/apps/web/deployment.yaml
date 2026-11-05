@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: ghcr.io/vyncenlara10/proyecto-vg5/web:sha-0903014a5d79fafa0a7271e628a794cf3c2aef65
+          image: ghcr.io/vyncenlara10/proyecto-vg5/web:sha-b524e88c9d48ba271b45b9ca43967db5bf1311ec
           ports:
             - name: http
               containerPort: 80
