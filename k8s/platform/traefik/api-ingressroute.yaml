@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: api-grupo5
+  namespace: kubelab-dev
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`api.grupo5.lab`)
+      kind: Rule
+      services:
+        - name: api
+          port: 80
