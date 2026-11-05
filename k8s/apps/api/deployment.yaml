@@ -16,6 +16,8 @@ spec:
       app: api
   template:
     metadata:
+      annotations:
+        secrets.doppler.com/reload: "true"
       labels:
         app: api
     spec:
