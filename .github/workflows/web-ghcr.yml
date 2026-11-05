@@ -2,7 +2,7 @@ name: Web GHCR
 
 on:
   push:
-    branches: [feature/roger-web]
+    branches: [feature/roger-web, feature/vyncen-integration]
     paths:
       - "apps/web/**"
       - ".github/workflows/web-ghcr.yml"

@@ -1,7 +1,7 @@
 import type { HealthState, Product, ProductInput } from "../types/product";
 
 export const API_URL = (
-  import.meta.env.VITE_API_URL ?? "http://localhost:8000"
+  import.meta.env.VITE_API_URL ?? ""
 ).replace(/\/$/, "");
 
 export type FieldErrors = { nombre?: string; cantidad?: string };
