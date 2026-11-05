@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
+  annotations:
+    secrets.doppler.com/reload: "true"
   labels:
     app: api
 spec:
@@ -17,6 +19,7 @@ spec:
   template:
     metadata:
       annotations:
+        kubelab.dev/db-url-refresh: "1"
         secrets.doppler.com/reload: "true"
       labels:
         app: api
