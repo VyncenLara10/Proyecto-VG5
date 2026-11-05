@@ -18,6 +18,9 @@ spec:
         runAsGroup: 999
       containers:
         - name: postgres
+          securityContext:
+            appArmorProfile:
+              type: Unconfined
           image: postgres:16
           ports:
             - containerPort: 5432
