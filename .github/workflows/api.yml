@@ -1,7 +1,7 @@
 name: api
 on:
   push:
-    branches: [feature/vyncen-integration]
+    branches: [feature/vyncen-integration, main]
     paths: ['apps/api/**']
 
 permissions:
