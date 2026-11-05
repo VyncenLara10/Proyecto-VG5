@@ -2,7 +2,9 @@ name: api
 on:
   push:
     branches: [feature/vyncen-integration, main]
-    paths: ['apps/api/**']
+    paths: ['apps/api/**', '.github/workflows/api.yml']
+
+  workflow_dispatch:
 
 permissions:
   contents: write
