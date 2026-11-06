@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/VyncenLara10/Proyecto-VG5.git
-    targetRevision: feature/vyncen-integration
+    targetRevision: main
     path: k8s/apps/web
   destination:
     server: https://kubernetes.default.svc
