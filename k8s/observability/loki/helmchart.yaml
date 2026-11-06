@@ -32,6 +32,9 @@ spec:
 
     singleBinary:
       kind: Deployment
+      strategy:
+        type: Recreate
+        rollingUpdate: null
       replicas: 1
 
       resources:
