@@ -48,3 +48,29 @@ Deployment synchronization is performed through Argo CD.
 
 Screenshots of successful GitHub Actions executions, pytest
 results, and HTTP smoke checks should be included in `docs/`.
+
+## CI/CD Evidence
+
+### 1. API GitHub Actions
+
+![Successful API CI/CD workflow](evidencias/ci-cd/01-api-actions.png)
+
+### 2. Web GitHub Actions
+
+![Successful frontend CI/CD workflow](evidencias/ci-cd/02-web-actions.png)
+
+### 3. Automated API Tests
+
+![Six passing pytest tests](evidencias/ci-cd/03-pytest.png)
+
+### 4. Integration Smoke Test
+
+![Four successful HTTP checks](evidencias/ci-cd/04-smoke-test.png)
+
+### 5. API GitOps Image Update
+
+![Automated API image update](evidencias/ci-cd/05-api-gitops.png)
+
+### 6. Web GitOps Image Update
+
+![Automated web image update](evidencias/ci-cd/06-web-gitops.png)
