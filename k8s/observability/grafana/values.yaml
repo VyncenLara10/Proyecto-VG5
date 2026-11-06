@@ -14,7 +14,7 @@ resources:
 persistence:
   enabled: true
   type: pvc
-  storageClassName: local-path
+  existingClaim: kubelab-grafana-nfs
   accessModes:
     - ReadWriteOnce
   size: 1Gi
@@ -44,3 +44,11 @@ sidecar:
     label: grafana_dashboard
     labelValue: "1"
     searchNamespace: kubelab-monitoring
+
+startupProbe:
+  httpGet:
+    path: /api/health
+    port: grafana
+  periodSeconds: 10
+  timeoutSeconds: 10
+  failureThreshold: 60
