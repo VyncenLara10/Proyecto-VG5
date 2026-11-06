@@ -1,0 +1,17 @@
+daemonset:
+  enabled: true
+
+config:
+  clients:
+    - url: http://kubelab-loki-gateway.kubelab-monitoring.svc.cluster.local/loki/api/v1/push
+
+resources:
+  requests:
+    cpu: 15m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+serviceMonitor:
+  enabled: false

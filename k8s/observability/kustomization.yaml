@@ -5,3 +5,4 @@ resources:
   - prometheus/helmchart.yaml
   - grafana/helmchart.yaml
   - loki/helmchart.yaml
+  - promtail/helmchart.yaml
