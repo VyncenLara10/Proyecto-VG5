@@ -48,3 +48,10 @@ spec:
             access: proxy
             url: http://kubelab-loki-gateway.kubelab-monitoring.svc.cluster.local
             editable: false
+
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
+        searchNamespace: kubelab-monitoring

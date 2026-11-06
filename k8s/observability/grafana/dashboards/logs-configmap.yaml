@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubelab-dashboard-logs
+  namespace: kubelab-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  kubelab-logs.json: |-
+    {
+      "uid": "kubelab-logs",
+      "title": "KubeLab - Application Logs",
+      "schemaVersion": 39,
+      "version": 1,
+      "refresh": "10s",
+      "timezone": "browser",
+      "time": {
+        "from": "now-30m",
+        "to": "now"
+      },
+      "tags": [
+        "kubelab",
+        "gitops"
+      ],
+      "panels": [
+        {
+          "id": 1,
+          "title": "API logs",
+          "type": "logs",
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 0,
+            "w": 24,
+            "h": 10
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "{namespace=\"kubelab-dev\",app=\"api\"}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Web logs",
+          "type": "logs",
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 10,
+            "w": 24,
+            "h": 10
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "{namespace=\"kubelab-dev\",app=\"web\"}",
+              "queryType": "range"
+            }
+          ]
+        }
+      ]
+    }

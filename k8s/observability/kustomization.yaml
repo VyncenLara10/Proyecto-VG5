@@ -6,3 +6,5 @@ resources:
   - grafana/helmchart.yaml
   - loki/helmchart.yaml
   - promtail/helmchart.yaml
+  - grafana/dashboards/metrics-configmap.yaml
+  - grafana/dashboards/logs-configmap.yaml
