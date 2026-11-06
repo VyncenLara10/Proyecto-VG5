@@ -17,18 +17,19 @@ spec:
       enabled: false
 
     server:
-      retention: 2d
+      retention: 6h
+      retentionSize: 350MB
       resources:
         requests:
           cpu: 100m
           memory: 256Mi
         limits:
           cpu: 500m
-          memory: 768Mi
+          memory: 512Mi
 
       persistentVolume:
         enabled: true
-        storageClass: local-path
+        existingClaim: kubelab-prometheus-single
         size: 4Gi
 
       service:
@@ -37,7 +38,7 @@ spec:
     extraScrapeConfigs: |
       - job_name: kubelab-api
         metrics_path: /metrics
-        scrape_interval: 15s
+        scrape_interval: 30s
         static_configs:
           - targets:
               - api.kubelab-dev.svc.cluster.local:80

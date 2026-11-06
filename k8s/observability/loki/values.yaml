@@ -20,6 +20,7 @@ loki:
           period: 24h
 
 singleBinary:
+  kind: Deployment
   replicas: 1
 
   resources:
@@ -28,11 +29,13 @@ singleBinary:
       memory: 128Mi
     limits:
       cpu: 500m
-      memory: 768Mi
+      memory: 512Mi
 
   persistence:
-    enabled: true
-    storageClass: local-path
+    enabled: false
+    dataVolumeParameters:
+      persistentVolumeClaim:
+        claimName: kubelab-loki-single
     accessModes:
       - ReadWriteOnce
     size: 3Gi
