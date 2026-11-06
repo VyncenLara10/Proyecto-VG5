@@ -15,7 +15,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`argocd.local`)
+    - match: Host(`argocd.local`) || Host(`argocd.grupo5.lab`)
       kind: Rule
       services:
         - name: argocd-server

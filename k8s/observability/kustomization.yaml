@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - prometheus/pvc.yaml
   - prometheus/helmchart.yaml
+  - prometheus/ingressroute.yaml
   - grafana/pvc.yaml
   - grafana/helmchart.yaml
   - loki/pvc.yaml
