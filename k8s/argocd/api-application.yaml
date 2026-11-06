@@ -12,5 +12,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: kubelab-dev
-  syncOptions:
-    - CreateNamespace=true
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
