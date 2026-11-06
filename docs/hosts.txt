@@ -1,8 +1,0 @@
-# Grupo 5 - KubeLab
-# IP de Traefik asignada por MetalLB
-192.168.50.240 app.grupo5.lab
-192.168.50.240 api.grupo5.lab
-192.168.50.241 db.grupo5.lab
-192.168.50.240 grafana.grupo5.lab
-192.168.50.240 prometheus.grupo5.lab
-192.168.50.240 argocd.grupo5.lab
