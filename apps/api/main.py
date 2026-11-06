@@ -38,7 +38,7 @@ def health():
     try:
         with db() as c:
             c.execute("SELECT 1")
-        return {"status": "ok"}
+        return {"status": "okas"}
     except Exception:
         raise HTTPException(status_code=503, detail="db unavailable")
 
