@@ -8,3 +8,4 @@ resources:
   - promtail/helmchart.yaml
   - grafana/dashboards/metrics-configmap.yaml
   - grafana/dashboards/logs-configmap.yaml
+  - grafana/ingressroute.yaml
