@@ -4,6 +4,7 @@ namespace: kubelab-dev
 resources:
   - statefulset.yaml
   - service.yaml
+  - external-service.yaml
   - init-job.yaml
 configMapGenerator:
   - name: db-schema

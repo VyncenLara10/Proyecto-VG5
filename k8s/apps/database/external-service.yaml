@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-external
+  namespace: kubelab-dev
+  annotations:
+    metallb.io/loadBalancerIPs: "192.168.50.241"
+spec:
+  type: LoadBalancer
+  selector:
+    app: postgres
+  ports:
+    - name: postgresql
+      port: 5432
+      targetPort: 5432
+      protocol: TCP
