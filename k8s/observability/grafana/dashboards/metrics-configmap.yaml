@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubelab-dashboard-metrics
+  namespace: kubelab-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  kubelab-metrics.json: |-
+    {
+      "uid": "kubelab-metrics",
+      "title": "KubeLab - Infrastructure & API",
+      "schemaVersion": 39,
+      "version": 1,
+      "refresh": "10s",
+      "timezone": "browser",
+      "time": {
+        "from": "now-30m",
+        "to": "now"
+      },
+      "tags": [
+        "kubelab",
+        "gitops"
+      ],
+      "panels": [
+        {
+          "id": 1,
+          "title": "API target available",
+          "type": "stat",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 0,
+            "w": 8,
+            "h": 6
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "up{job=\"kubelab-api\"}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Available API replicas",
+          "type": "stat",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "gridPos": {
+            "x": 8,
+            "y": 0,
+            "w": 8,
+            "h": 6
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "kube_deployment_status_replicas_available{namespace=\"kubelab-dev\",deployment=\"api\"}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Available Web replicas",
+          "type": "stat",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "gridPos": {
+            "x": 16,
+            "y": 0,
+            "w": 8,
+            "h": 6
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "kube_deployment_status_replicas_available{namespace=\"kubelab-dev\",deployment=\"web\"}",
+              "queryType": "range"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Ready application Pods",
+          "type": "timeseries",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 6,
+            "w": 24,
+            "h": 9
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (pod) (kube_pod_status_ready{namespace=\"kubelab-dev\",condition=\"true\",pod=~\"(api|web)-.*\"})",
+              "queryType": "range"
+            }
+          ]
+        }
+      ]
+    }
