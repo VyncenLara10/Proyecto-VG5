@@ -37,7 +37,7 @@ def test_health_base_disponible(monkeypatch):
 
     r = TestClient(app).get("/health")
     assert r.status_code == 200
-    assert r.json() == {"status": "ok"}
+    assert r.json() == {"status": "okas"}
 
 
 def test_health_base_no_disponible(monkeypatch):
