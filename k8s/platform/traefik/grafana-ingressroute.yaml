@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-grupo5
+  namespace: kubelab-monitoring
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`grafana.grupo5.lab`)
+      kind: Rule
+      services:
+        - name: kubelab-grafana
+          port: 80

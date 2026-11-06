@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+spec:
+  backoffLimit: 10
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: init
+          image: postgres:16
+          command: ["sh", "-c", "until pg_isready -h postgres -U $PGUSER; do sleep 2; done; psql -h postgres -U $PGUSER -d app -f /schema/schema.sql"]
+          env:
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef: { name: db-credentials, key: DB_USER }
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef: { name: db-credentials, key: DB_PASSWORD }
+          volumeMounts:
+            - name: schema
+              mountPath: /schema
+      volumes:
+        - name: schema
+          configMap:
+            name: db-schema

@@ -1,0 +1,28 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: kubelab-promtail
+  namespace: kube-system
+spec:
+  chart: promtail
+  repo: https://grafana.github.io/helm-charts
+  version: 6.17.1
+  targetNamespace: kubelab-monitoring
+  valuesContent: |-
+    daemonset:
+      enabled: true
+
+    config:
+      clients:
+        - url: http://kubelab-loki-gateway.kubelab-monitoring.svc.cluster.local/loki/api/v1/push
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 32Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+
+    serviceMonitor:
+      enabled: false

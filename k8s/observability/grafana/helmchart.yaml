@@ -1,0 +1,65 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: kubelab-grafana
+  namespace: kube-system
+spec:
+  chart: grafana
+  repo: https://grafana-community.github.io/helm-charts
+  version: 14.4.0
+  targetNamespace: kubelab-monitoring
+  valuesContent: |-
+    replicas: 1
+
+    service:
+      type: ClusterIP
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 300m
+        memory: 512Mi
+
+    persistence:
+      enabled: true
+      type: pvc
+      existingClaim: kubelab-grafana-nfs
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
+
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Prometheus
+            uid: prometheus
+            type: prometheus
+            access: proxy
+            url: http://kubelab-prometheus-server.kubelab-monitoring.svc.cluster.local
+            isDefault: true
+            editable: false
+
+          - name: Loki
+            uid: loki
+            type: loki
+            access: proxy
+            url: http://kubelab-loki-gateway.kubelab-monitoring.svc.cluster.local
+            editable: false
+
+    sidecar:
+      dashboards:
+        enabled: true
+        label: grafana_dashboard
+        labelValue: "1"
+        searchNamespace: kubelab-monitoring
+
+    startupProbe:
+      httpGet:
+        path: /api/health
+        port: grafana
+      periodSeconds: 10
+      timeoutSeconds: 10
+      failureThreshold: 60

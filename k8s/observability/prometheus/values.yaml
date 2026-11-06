@@ -1,0 +1,35 @@
+alertmanager:
+  enabled: false
+
+prometheus-pushgateway:
+  enabled: false
+
+server:
+  retention: 6h
+  retentionSize: 350MB
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  persistentVolume:
+    enabled: true
+    existingClaim: kubelab-prometheus-single
+    size: 4Gi
+
+  service:
+    type: ClusterIP
+
+extraScrapeConfigs: |
+  - job_name: kubelab-api
+    metrics_path: /metrics
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+          - api.kubelab-dev.svc.cluster.local:80
+        labels:
+          namespace: kubelab-dev
+          app: api
